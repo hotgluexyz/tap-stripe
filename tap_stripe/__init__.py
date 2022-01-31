@@ -5,6 +5,8 @@ import logging
 import re
 
 from datetime import datetime, timedelta
+from tap_stripe.custom.promotion_code import PromotionCode
+from tap_stripe.custom.checkout_session import CheckoutSession
 import stripe
 import stripe.error
 from stripe.stripe_object import StripeObject
@@ -42,6 +44,8 @@ STREAM_SDK_OBJECTS = {
     'payout_transactions': {'sdk_object': stripe.BalanceTransaction, 'key_properties': ['id']},
     'disputes': {'sdk_object': stripe.Dispute, 'key_properties': ['id']},
     'products': {'sdk_object': stripe.Product, 'key_properties': ['id']},
+    'promotion_codes': {'sdk_object': PromotionCode, 'key_properties': ['id']},
+    'checkout_sessions': {'sdk_object': CheckoutSession, 'key_properties': ['id']},
 }
 
 # I think this can be merged into the above structure
@@ -64,6 +68,7 @@ STREAM_REPLICATION_KEY = {
     #'invoice_line_items': 'date'
     'disputes': 'created',
     'products': 'created',
+    'promotion_codes': 'created',
 }
 
 STREAM_TO_TYPE_FILTER = {
@@ -378,13 +383,16 @@ def reduce_foreign_keys(rec, stream_name):
 
 
 def paginate(sdk_obj, filter_key, start_date, end_date, request_args=None, limit=100):
+    if filter_key:
+        filter_parameters = {filter_key + "[gte]": start_date, filter_key + "[lt]": end_date}
+    else:
+        filter_parameters = {}
     yield from sdk_obj.list(
         limit=limit,
         stripe_account=Context.config.get('account_id'),
         # None passed to starting_after appears to retrieve
         # all of them so this should always be safe.
-        **{filter_key + "[gte]": start_date,
-           filter_key + "[lt]": end_date},
+        **filter_parameters,
         **request_args or {}
     ).auto_paging_iter()
 
@@ -408,7 +416,9 @@ def sync_stream(stream_name):
     stream_field_whitelist = json.loads(Context.config.get('whitelist_map', '{}')).get(stream_name)
 
     extraction_time = singer.utils.now()
-    replication_key = metadata.get(stream_metadata, (), 'valid-replication-keys')[0]
+    replication_key = metadata.get(stream_metadata, (), 'valid-replication-keys')
+    if replication_key:
+        replication_key = replication_key[0]
     # Invoice Items bookmarks on `date`, but queries on `created`
     filter_key = 'created' if stream_name == 'invoice_items' else replication_key
     stream_bookmark = singer.get_bookmark(Context.state, stream_name, replication_key) or \
@@ -471,11 +481,12 @@ def sync_stream(stream_name):
                 # get the replication key value from the object
                 rec = unwrap_data_objects(stream_obj.to_dict_recursive())
                 rec = reduce_foreign_keys(rec, stream_name)
-                stream_obj_created = rec[replication_key]
-                rec['updated'] = stream_obj_created
+                if replication_key:
+                    stream_obj_created = rec[replication_key]
+                    rec['updated'] = stream_obj_created
 
                 # sync stream if object is greater than or equal to the bookmark
-                if stream_obj_created >= stream_bookmark:
+                if (replication_key==None) or (stream_obj_created >= stream_bookmark):
                     rec = transformer.transform(rec,
                                                 Context.get_catalog_entry(stream_name)['schema'],
                                                 stream_metadata)
@@ -514,6 +525,9 @@ def sync_stream(stream_name):
                                       sub_stream_bookmark)
 
             singer.write_state(Context.state)
+
+            if filter_key==None:
+                break
 
             # update window for next iteration
             start_window = stop_window

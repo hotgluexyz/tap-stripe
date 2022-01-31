@@ -1,0 +1,226 @@
+{
+    "type": [
+        "null",
+        "object"
+    ],
+    "properties": {
+        "id": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "object": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "after_expiration": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "allow_promotion_codes": {
+            "type": [
+                "null",
+                "boolean"
+            ]
+        },
+        "amount_subtotal": {
+            "type": [
+                "null",
+                "number"
+            ]
+        },
+        "amount_total": {
+            "type": [
+                "null",
+                "number"
+            ]
+        },
+        "cancel_url": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "client_reference_id": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "consent": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "consent_collection": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "currency": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "customer": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "customer_creation": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "customer_details": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "customer_email": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "expires_at": {
+            "type": [
+                "null",
+                "integer"
+            ]
+        },
+        "livemode": {
+            "type": [
+                "null",
+                "boolean"
+            ]
+        },
+        "mode": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "payment_intent": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "payment_link": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "payment_method_options": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "payment_status": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "recovered_from": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "setup_intent": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "shipping": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "shipping_address_collection": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "shipping_rate": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "status": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "submit_type": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "subscription": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "success_url": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "url": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "total_details": {
+            "type": [
+                "null",
+                "object"
+            ],
+            "properties": {
+                "amount_discount": {
+                    "type": [
+                        "null",
+                        "number"
+                    ]
+                },
+                "amount_shipping": {
+                    "type": [
+                        "null",
+                        "number"
+                    ]
+                },
+                "amount_tax": {
+                    "type": [
+                        "null",
+                        "number"
+                    ]
+                }
+            }
+        }
+    }
+}
