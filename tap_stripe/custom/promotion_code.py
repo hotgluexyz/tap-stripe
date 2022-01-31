@@ -7,6 +7,3 @@ class PromotionCode(ListableAPIResource):
     @classmethod
     def class_url(cls):
         return '/v1/promotion_codes'
-
-
-    
