@@ -29,7 +29,7 @@ setup(
     [console_scripts]
     tap-stripe=tap_stripe:main
     """,
-    packages=["tap_stripe"],
+    packages=["tap_stripe", "tap_stripe.custom"],
     package_data = {
         "schemas": ["tap_stripe/schemas/*.json"]
     },
