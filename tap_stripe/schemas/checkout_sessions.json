@@ -106,6 +106,12 @@
                 "boolean"
             ]
         },
+        "metadata": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
         "mode": {
             "type": [
                 "null",

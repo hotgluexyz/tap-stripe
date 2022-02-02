@@ -46,6 +46,7 @@ STREAM_SDK_OBJECTS = {
     'products': {'sdk_object': stripe.Product, 'key_properties': ['id']},
     'promotion_codes': {'sdk_object': PromotionCode, 'key_properties': ['id']},
     'checkout_sessions': {'sdk_object': CheckoutSession, 'key_properties': ['id']},
+    'payment_intents': {'sdk_object': stripe.PaymentIntent, 'key_properties': ['id']},
 }
 
 # I think this can be merged into the above structure
@@ -69,6 +70,7 @@ STREAM_REPLICATION_KEY = {
     'disputes': 'created',
     'products': 'created',
     'promotion_codes': 'created',
+    'payment_intents': 'created',
 }
 
 STREAM_TO_TYPE_FILTER = {
