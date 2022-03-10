@@ -175,6 +175,12 @@
         "string"
       ]
     },
+    "price": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
     "plan": {"$ref": "shared/plan.json#/"},
     "invoice_item": {
       "type": [

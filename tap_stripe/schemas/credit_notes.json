@@ -1,0 +1,158 @@
+{
+  "type": [
+    "null",
+    "object"
+  ],
+  "properties": {
+    "id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "object": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "amount": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "created": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "currency": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "customer": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "customer_balance_transaction": {
+      "type": [
+        "null",
+        "object"
+      ]
+    },
+    "discount_amount": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "discount_amounts": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "invoice": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "lines": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "livemode": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "memo": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "metadata": {
+      "type": [
+        "null",
+        "object"
+      ]
+    },
+    "number": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "out_of_band_amount": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "pdf": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "reason": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "refund": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "status": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "subtotal": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "tax_amounts": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "total": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    },
+    "type": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "voided_at": {
+      "type": [
+        "null",
+        "integer"
+      ]
+    }
+  }
+}

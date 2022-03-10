@@ -28,6 +28,9 @@ STREAM_SDK_OBJECTS = {
     'invoice_items': {'sdk_object': stripe.InvoiceItem, 'key_properties': ['id']},
     'invoice_line_items': {'sdk_object': stripe.InvoiceLineItem,
                            'key_properties': ['id', 'invoice']},
+    'credit_notes': {'sdk_object': stripe.CreditNote, 'key_properties': ['id']},
+    'credit_note_line_items': {'sdk_object': stripe.CreditNoteLineItem,
+                           'key_properties': ['id', 'credit_note']},
     'transfers': {'sdk_object': stripe.Transfer, 'key_properties': ['id']},
     'coupons': {'sdk_object': stripe.Coupon, 'key_properties': ['id']},
     'subscriptions': {
@@ -94,6 +97,7 @@ STREAM_TO_TYPE_FILTER = {
 SUB_STREAMS = {
     'subscriptions': 'subscription_items',
     'invoices': 'invoice_line_items',
+    'credit_notes': 'credit_note_line_items',
     'payouts': 'payout_transactions'
 }
 
@@ -486,6 +490,8 @@ def sync_stream(stream_name):
                 if replication_key:
                     stream_obj_created = rec[replication_key]
                     rec['updated'] = stream_obj_created
+                else:
+                    stream_obj_created=datetime.now().timestamp()
 
                 # sync stream if object is greater than or equal to the bookmark
                 if (replication_key==None) or (stream_obj_created >= stream_bookmark):
@@ -569,6 +575,8 @@ def sync_sub_stream(sub_stream_name, parent_obj, updates=False):
     extraction_time = singer.utils.now()
 
     if sub_stream_name == "invoice_line_items":
+        object_list = parent_obj.lines
+    elif sub_stream_name == "credit_note_line_items":
         object_list = parent_obj.lines
     elif sub_stream_name == "subscription_items":
         # parent_obj.items is a function that returns a dict iterator, so use the attribute
