@@ -42,8 +42,9 @@
     },
     "customer_balance_transaction": {
       "type": [
-        "null",
-        "object"
+        "string",
+        "object",
+        "null"
       ]
     },
     "discount_amount": {
