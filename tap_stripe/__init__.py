@@ -417,6 +417,7 @@ def sync_stream(stream_name):
     Sync each stream, looking for newly created records. Updates are captured by events stream.
     """
     LOGGER.info("Started syncing stream %s", stream_name)
+    logging.getLogger("stripe").setLevel(logging.CRITICAL)
 
     stream_metadata = metadata.to_map(Context.get_catalog_entry(stream_name)['metadata'])
     stream_field_whitelist = json.loads(Context.config.get('whitelist_map', '{}')).get(stream_name)
