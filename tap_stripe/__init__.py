@@ -393,6 +393,8 @@ def paginate(sdk_obj, filter_key, start_date, end_date, request_args=None, limit
         filter_parameters = {filter_key + "[gte]": start_date, filter_key + "[lt]": end_date}
     else:
         filter_parameters = {}
+    if sdk_obj.OBJECT_NAME=="product":
+        filter_parameters["active"] = False
     yield from sdk_obj.list(
         limit=limit,
         stripe_account=Context.config.get('account_id'),
