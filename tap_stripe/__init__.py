@@ -837,7 +837,7 @@ def sync():
         if Context.is_selected(stream_name) and not Context.is_sub_stream(stream_name):
             sync_stream(stream_name)
             # This prevents us from retrieving 'events.events'
-            if STREAM_TO_TYPE_FILTER.get(stream_name):
+            if STREAM_TO_TYPE_FILTER.get(stream_name) and Context.config.get("sync_events", False):
                 sync_event_updates(stream_name)
 
 @utils.handle_top_exception(LOGGER)
