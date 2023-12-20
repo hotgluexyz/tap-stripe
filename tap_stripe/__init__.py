@@ -433,6 +433,11 @@ def sync_stream(stream_name):
     stream_bookmark = singer.get_bookmark(Context.state, stream_name, replication_key) or \
         int(utils.strptime_to_utc(Context.config["start_date"]).timestamp())
     bookmark = stream_bookmark
+    #force full sync using config for balance_transactions stream
+    if stream_name == "balance_transactions":
+        bookmark = int(utils.strptime_to_utc(Context.config["start_date"]).timestamp())
+        replication_key = None
+
 
     # if this stream has a sub_stream, compare the bookmark
     sub_stream_name = SUB_STREAMS.get(stream_name)
